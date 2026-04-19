@@ -1,49 +1,49 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 import pickle
 
+# Load files
 model = pickle.load(open("model.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
+features = pickle.load(open("features.pkl", "rb"))
 
-st.title("Student Exam Score Predictor")
+st.set_page_config(page_title="Student Predictor", layout="wide")
 
-with st.form("prediction_form"):
-    col1, col2, col3 = st.columns(3)
+st.title("🎓 Student Exam Score Predictor")
 
-    with col1:
-        study_hours = st.number_input("Study Hours", 0.0, 12.0)
-        sleep_hours = st.number_input("Sleep Hours", 0.0, 12.0)
-        attendance = st.slider("Attendance", 0, 100)
+st.write("Fill all inputs to predict score")
 
-        internet_usage = st.number_input("Internet Usage", 0.0, 12.0)
-        exercise_hours = st.number_input("Exercise Hours", 0.0, 5.0)
+# 🔥 Dynamic input (no mismatch ever)
+input_data = {}
 
-    with col2:
-        mobile_usage = st.number_input("Mobile Usage", 0.0, 12.0)
-        diet_quality = st.slider("Diet Quality", 1, 5)
-        stress_level = st.slider("Stress Level", 1, 10)
+col1, col2, col3 = st.columns(3)
 
-        mental_health = st.slider("Mental Health", 1, 10)
-        social_activity = st.slider("Social Activity", 1, 10)
+for i, feature in enumerate(features):
+    if i % 3 == 0:
+        input_data[feature] = col1.number_input(feature, value=0.0)
+    elif i % 3 == 1:
+        input_data[feature] = col2.number_input(feature, value=0.0)
+    else:
+        input_data[feature] = col3.number_input(feature, value=0.0)
 
-    with col3:
-        previous_score = st.number_input("Previous Score", 0, 100)
-        class_participation = st.slider("Class Participation", 1, 5)
-        assignment_completion = st.slider("Assignment Completion", 0, 100)
+# Prediction
+if st.button("Predict Score"):
+    try:
+        df = pd.DataFrame([input_data])
 
-        parental_support = st.slider("Parental Support", 1, 5)
-        extracurricular = st.slider("Extracurricular", 1, 5)
+        df_scaled = scaler.transform(df)
+        prediction = model.predict(df_scaled)[0]
 
-    submit = st.form_submit_button("Predict Score")
+        st.success(f"Predicted Score: {prediction:.2f}")
 
-if submit:
-    data = np.array([[study_hours, sleep_hours, attendance, mobile_usage,
-                      internet_usage, exercise_hours, diet_quality, stress_level,
-                      mental_health, social_activity, previous_score,
-                      class_participation, assignment_completion,
-                      parental_support, extracurricular]])
+        # Simple interpretation
+        if prediction > 80:
+            st.success("Excellent Performance 🎉")
+        elif prediction > 50:
+            st.info("Average Performance 👍")
+        else:
+            st.error("Needs Improvement ⚠️")
 
-    data = scaler.transform(data)
-    result = model.predict(data)[0]
-
-    st.success(f"Predicted Score: {result:.2f}")
+    except Exception as e:
+        st.error(f"Error: {e}")
