@@ -1,67 +1,41 @@
 import streamlit as st
 import numpy as np
 import pickle
-import os
 
-# ---- LOAD MODEL SAFELY ----
-if os.path.exists("model.pkl") and os.path.exists("scaler.pkl"):
-    model = pickle.load(open("model.pkl", "rb"))
-    scaler = pickle.load(open("scaler.pkl", "rb"))
-else:
-    st.error("Model or Scaler file not found!")
-    st.stop()
+model = pickle.load(open("model.pkl", "rb"))
+scaler = pickle.load(open("scaler.pkl", "rb"))
 
-# ---- PAGE CONFIG ----
-st.set_page_config(page_title="Student Score Predictor", layout="wide")
+st.set_page_config(page_title="Student Predictor", layout="wide")
 
-# ---- SIDEBAR ----
-st.sidebar.title("🎯 Student Inputs")
+st.sidebar.title("Student Inputs")
 
 study_hours = st.sidebar.slider("Study Hours", 0.0, 12.0, 4.0)
 sleep_hours = st.sidebar.slider("Sleep Hours", 0.0, 12.0, 6.0)
 attendance = st.sidebar.slider("Attendance (%)", 0, 100, 75)
-mobile_usage = st.sidebar.slider("Mobile Usage (Hours)", 0.0, 12.0, 3.0)
+mobile_usage = st.sidebar.slider("Mobile Usage", 0.0, 12.0, 3.0)
+internet_usage = st.sidebar.slider("Internet Usage", 0.0, 12.0, 3.0)
+exercise_hours = st.sidebar.slider("Exercise Hours", 0.0, 5.0, 1.0)
 
-predict_btn = st.sidebar.button("Predict Score")
+diet_quality = st.sidebar.slider("Diet Quality (1-5)", 1, 5, 3)
+stress_level = st.sidebar.slider("Stress Level (1-10)", 1, 10, 5)
+mental_health = st.sidebar.slider("Mental Health (1-10)", 1, 10, 6)
+social_activity = st.sidebar.slider("Social Activity (1-10)", 1, 10, 5)
 
-# ---- MAIN TITLE ----
-st.title("📊 Student Performance Dashboard")
+previous_score = st.sidebar.number_input("Previous Score", 0, 100, 60)
+class_participation = st.sidebar.slider("Class Participation (1-5)", 1, 5, 3)
+assignment_completion = st.sidebar.slider("Assignment Completion (%)", 0, 100, 70)
+parental_support = st.sidebar.slider("Parental Support (1-5)", 1, 5, 3)
+extracurricular = st.sidebar.slider("Extracurricular (1-5)", 1, 5, 3)
 
-# ---- LAYOUT ----
-col1, col2 = st.columns(2)
+if st.sidebar.button("Predict"):
+    data = np.array([[study_hours, sleep_hours, attendance, mobile_usage,
+                      internet_usage, exercise_hours, diet_quality, stress_level,
+                      mental_health, social_activity, previous_score,
+                      class_participation, assignment_completion,
+                      parental_support, extracurricular]])
 
-# ---- INPUT DISPLAY ----
-with col1:
-    st.subheader("📌 Input Summary")
-    st.write(f"Study Hours: {study_hours}")
-    st.write(f"Sleep Hours: {sleep_hours}")
-    st.write(f"Attendance: {attendance}%")
-    st.write(f"Mobile Usage: {mobile_usage}")
+    data = scaler.transform(data)
+    result = model.predict(data)[0]
 
-# ---- PREDICTION ----
-with col2:
-    st.subheader("📈 Prediction Result")
-
-    if predict_btn:
-        try:
-            input_data = np.array([[study_hours, sleep_hours, attendance, mobile_usage]])
-            input_scaled = scaler.transform(input_data)
-
-            prediction = model.predict(input_scaled)[0]
-
-            st.metric(label="Predicted Score", value=f"{prediction:.2f}")
-
-            # Performance Label
-            if prediction > 80:
-                st.success("Excellent Performance 🎉")
-            elif prediction > 50:
-                st.info("Average Performance 👍")
-            else:
-                st.error("Needs Improvement ⚠️")
-
-        except Exception as e:
-            st.error(f"Error: {e}")
-
-# ---- FOOTER ----
-st.markdown("---")
-st.caption("Machine Learning based Student Score Prediction System")
+    st.title("Prediction Result")
+    st.metric("Predicted Score", f"{result:.2f}")
