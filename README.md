@@ -1,3 +1,4 @@
+Project Name: Student Performance Prediction using Machine Learning
 The objective of this project was to predict student exam scores based on their academic habits, lifestyle, and personal factors such as study hours, attendance, sleep, social media usage, exercise, and mental health.
 
 1. Dataset Collection
