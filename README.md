@@ -1,107 +1,146 @@
-Project Name: Student Performance Prediction using Machine Learning
-The objective of this project was to predict student exam scores based on their academic habits, lifestyle, and personal factors such as study hours, attendance, sleep, social media usage, exercise, and mental health.
+# Student Performance Prediction using Machine Learning
 
-1. Dataset Collection
+## Project Overview
+This project predicts student exam scores based on lifestyle, academic, and personal habit data using multiple machine learning regression algorithms. The main goal is to analyze how factors such as study hours, social media usage, sleep, attendance, exercise, and mental health impact academic performance.
 
-I used a student habits performance dataset containing 1000 student records and 16 features.
+The project includes data preprocessing, feature engineering, model training, model evaluation, and model serialization for future deployment.
 
-Some important features:
+---
 
-Study hours per day
-Attendance percentage
-Sleep hours
-Social media usage
-Netflix hours
-Diet quality
-Exercise frequency
-Mental health rating
-Exam score (target variable)
-2. Exploratory Data Analysis (EDA)
+## Features
+- Data loading and exploration
+- Missing value handling
+- Duplicate data checking
+- Categorical data encoding
+- Feature scaling
+- Train-test split
+- Multiple regression model training
+- Performance comparison using R² score
+- Model saving using Pickle
+- Ready for deployment integration
 
-To understand the dataset, I performed:
+---
 
-head()
-tail()
-shape
-info()
-describe()
-missing value analysis
+## Dataset Information
+The dataset contains **1000 student records** with **16 features** related to student habits and academic performance.
 
-This helped me understand the data structure and quality.
+### Features Used
+- student_id
+- age
+- gender
+- study_hours_per_day
+- social_media_hours
+- netflix_hours
+- part_time_job
+- attendance_percentage
+- sleep_hours
+- diet_quality
+- exercise_frequency
+- parental_education_level
+- internet_quality
+- mental_health_rating
+- extracurricular_participation
+- exam_score (Target Variable)
 
-3. Data Cleaning
+### Dataset Summary
+- Total rows: 1000
+- Total columns: 16
+- Missing values found in `parental_education_level`: 91
+- Final dataset after cleaning: 909 rows
 
-I cleaned the dataset by:
+---
 
-checking missing values
-finding null values in parental_education_level
-removing missing records using dropna()
-checking duplicate records
+## Technologies Used
+- Python
+- NumPy
+- Pandas
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- XGBoost
+- Pickle
 
-After cleaning, the dataset size became 909 records.
+---
 
-4. Data Preprocessing
+## Machine Learning Workflow
 
-Since machine learning models require numerical input, I converted categorical data into numeric format using Label Encoding.
+### 1. Data Collection
+The dataset is loaded using Pandas.
+
+### 2. Data Exploration
+Performed:
+- `head()`
+- `tail()`
+- `shape`
+- `info()`
+- `describe()`
+- null value checking
+
+### 3. Data Cleaning
+- Removed missing values using `dropna()`
+- Checked duplicate records
+- Encoded categorical columns using LabelEncoder
 
 Encoded columns:
+- student_id
+- gender
+- part_time_job
+- diet_quality
+- parental_education_level
+- extracurricular_participation
+- internet_quality
 
-gender
-part_time_job
-diet_quality
-parental_education_level
-internet_quality
-extracurricular_participation
-student_id
-5. Feature Selection
+### 4. Feature Selection
+Target column:
+- exam_score
 
-I selected:
-Target variable: exam_score
+Input features:
+- All remaining columns
 
-Input features: all remaining columns.
+### 5. Data Splitting
+Dataset split:
+- Training data: 80%
+- Testing data: 20%
 
-6. Train-Test Split
+### 6. Feature Scaling
+StandardScaler used for scaling numerical features.
 
-I divided the dataset into:
+---
 
-80% training data
-20% testing data
+## Models Used
+The following regression models were trained:
 
-using train_test_split() for model training and evaluation.
+- Linear Regression
+- Ridge Regression
+- Lasso Regression
+- Random Forest Regressor
+- Decision Tree Regressor
+- XGBoost Regressor
 
-7. Feature Scaling
+---
 
-I applied StandardScaler to normalize feature values so that machine learning models could perform better.
+## Model Performance (R² Score)
 
-8. Model Training
+| Model | R² Score |
+|------|---------|
+| Linear Regression | 0.8881 |
+| Ridge Regression | 0.8881 |
+| Lasso Regression | 0.8793 |
+| Random Forest Regressor | 0.8784 |
+| Decision Tree Regressor | 0.6536 |
+| XGBoost Regressor | 0.8779 |
 
-I trained multiple regression models to compare performance:
+### Best Performing Model
+**Ridge Regression** achieved the highest R² score.
 
-Linear Regression
-Ridge Regression
-Lasso Regression
-Random Forest Regressor
-Decision Tree Regressor
-XGBoost Regressor
-9. Model Evaluation
+---
 
-I evaluated all models using R² Score.
+## Model Saving
+Saved files:
+- `model.pkl`
+- `scaler.pkl`
 
-Results:
-
-Linear Regression → 88.8%
-Ridge Regression → 88.8%
-Lasso Regression → 87.9%
-Random Forest → 87.8%
-XGBoost → 87.7%
-Decision Tree → 65.3%
-
-Best performing model:
-Ridge Regression
-
-10. Model Saving
-
-Finally, I saved the trained model and scaler for future deployment using Pickle:
-
-model.pkl
-scaler.pkl
+Used:
+```python
+pickle.dump(rf, open("model.pkl", "wb"))
+pickle.dump(sc, open("scaler.pkl", "wb"))
