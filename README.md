@@ -35,41 +35,74 @@ The model evaluates multiple attributes such as **study hours, attendance, sleep
 This project demonstrates the complete **Machine Learning workflow**, including **data preprocessing, exploratory data analysis (EDA), feature engineering, model training, performance evaluation, model comparison, and deployment through an interactive Streamlit web application**. It provides valuable insights into the factors that influence academic success while showcasing practical applications of predictive analytics in education.
 
 ---
+## ✨ Features
 
-## Features
-- Data loading and exploration
-- Missing value handling
-- Duplicate data checking
-- Categorical data encoding
-- Feature scaling
-- Train-test split
-- Multiple regression model training
-- Performance comparison using R² score
-- Model saving using Pickle
-- Ready for deployment integration
+The **Student Performance Prediction System** offers a comprehensive end-to-end Machine Learning pipeline, covering every stage from data preprocessing to exam score prediction.
+
+* 📂 Load and explore student performance datasets
+* 🔍 Detect and handle missing values efficiently
+* 🧹 Identify and remove duplicate records
+* 🔄 Encode categorical features using **LabelEncoder**
+* 📊 Perform Exploratory Data Analysis (EDA) to uncover data patterns
+* ⚙️ Apply data preprocessing and feature engineering techniques
+* 📈 Scale numerical features using **StandardScaler**
+* ✂️ Split the dataset into training and testing sets (80:20)
+* 🤖 Train and compare multiple Machine Learning regression models
+* 📉 Evaluate model performance using **R² Score**
+* 🏆 Select the best-performing regression model based on accuracy
+* 💾 Save the trained model and scaler using **Pickle** for future use
+* 🌐 Predict student exam scores through an interactive **Streamlit Web Application**
+* 🚀 Deploy the application for real-time predictions and easy accessibility
 
 ---
+## 📊 Dataset Information
 
-## Dataset Information
-The dataset contains **1000 student records** with **16 features** related to student habits and academic performance.
+The project uses the **Student Performance Prediction Dataset**, which contains **1,000 student records** and **16 features** representing students' academic, lifestyle, and personal habits. These attributes are used to predict the **exam score** through Machine Learning regression models.
 
-### Features Used
-- student_id
-- age
-- gender
-- study_hours_per_day
-- social_media_hours
-- netflix_hours
-- part_time_job
-- attendance_percentage
-- sleep_hours
-- diet_quality
-- exercise_frequency
-- parental_education_level
-- internet_quality
-- mental_health_rating
-- extracurricular_participation
-- exam_score (Target Variable)
+| Property            | Value                                  |
+| ------------------- | -------------------------------------- |
+| **Dataset Name**    | Student Performance Prediction Dataset |
+| **Total Records**   | 1,000                                  |
+| **Total Features**  | 16                                     |
+| **Problem Type**    | Regression                             |
+| **Target Variable** | `exam_score`                           |
+
+### 📋 Dataset Features
+
+#### 👤 Student Information
+
+* `student_id`
+* `age`
+* `gender`
+
+#### 📚 Academic Habits
+
+* `study_hours_per_day`
+* `attendance_percentage`
+* `extracurricular_participation`
+
+#### 🌿 Lifestyle Factors
+
+* `sleep_hours`
+* `exercise_frequency`
+* `diet_quality`
+* `part_time_job`
+
+#### 🌐 Digital & Entertainment Usage
+
+* `social_media_hours`
+* `netflix_hours`
+* `internet_quality`
+
+#### 🧠 Personal & Family Factors
+
+* `mental_health_rating`
+* `parental_education_level`
+
+#### 🎯 Target Variable
+
+* `exam_score` *(Student's Final Exam Score)*
+
 
 ### Dataset Summary
 - Total rows: 1000
