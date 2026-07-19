@@ -1,7 +1,7 @@
 # 🎓 Student Performance Prediction using Machine Learning
 
 <div align="center">
-
+  
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![Machine Learning](https://img.shields.io/badge/Machine-Learning-green)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-orange)
