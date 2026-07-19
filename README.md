@@ -1,9 +1,38 @@
-# Student Performance Prediction using Machine Learning
+# 🎓 Student Performance Prediction using Machine Learning
 
-## Project Overview
-This project predicts student exam scores based on lifestyle, academic, and personal habit data using multiple machine learning regression algorithms. The main goal is to analyze how factors such as study hours, social media usage, sleep, attendance, exercise, and mental health impact academic performance.
+<div align="center">
 
-The project includes data preprocessing, feature engineering, model training, model evaluation, and model serialization for future deployment.
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Machine Learning](https://img.shields.io/badge/Machine-Learning-green)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-orange)
+![XGBoost](https://img.shields.io/badge/XGBoost-Regressor-success)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web%20Application-red)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+
+### 📊 Predict Student Exam Scores Using Machine Learning Regression
+
+*An end-to-end Machine Learning project that predicts student academic performance based on lifestyle, study habits, and personal factors.*
+
+</div>
+
+---
+
+## 🌐 Live Demo
+
+🚀 **Try the Web Application Here**
+
+**🔗 https://studenthabitsperformance-4h6uedfpnyfxlcvewhkk5q.streamlit.app/**
+
+---
+
+# 📌 Project Overview
+
+The **Student Performance Prediction System** is an end-to-end **Machine Learning Regression** project developed using **Python**, **Scikit-Learn**, **XGBoost**, **Pandas**, **NumPy**, and **Streamlit**. The objective of this project is to predict a student's **exam score** by analyzing various academic, lifestyle, and personal factors.
+
+The model evaluates multiple attributes such as **study hours, attendance, sleep duration, social media usage, Netflix usage, exercise frequency, diet quality, internet quality, parental education level, mental health rating, and extracurricular participation** to estimate student performance accurately.
+
+This project demonstrates the complete **Machine Learning workflow**, including **data preprocessing, exploratory data analysis (EDA), feature engineering, model training, performance evaluation, model comparison, and deployment through an interactive Streamlit web application**. It provides valuable insights into the factors that influence academic success while showcasing practical applications of predictive analytics in education.
 
 ---
 
